@@ -7,6 +7,18 @@
 #include <stdarg.h>
 #include <limits.h>
 
+#define UNUSED(x) (void)()
+#define BUFF_SIZE 1024
+/****************** FUNCTIONS ******************/
+
+
+/* Funciotns to handle other specifiers */
+int get_flags(const char *format, int *i);
+int get_width(const char *format, int *i, va_list list);
+int get_precision(const char *format, int *i, va_list list);
+int get_size(const char *format, int *i);
+
+
 int	_putchar(char c);
 int	_puts(char *str);
 void	print_num(long n, int *len);
