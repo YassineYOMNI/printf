@@ -1,5 +1,16 @@
 #include "main.h"
-void print_ing(char ingre[], int *lenb);
+/**
+ * print_ing - Prints the contents of the buffer if it exist
+ * @ingre: Array of chars
+ * @lenb: Index at which to add next char, represents the length.
+*/
+void print_ing(char ingre[], int *lenb)
+{
+if (*lenb > 0)
+write(1, &ingre[0], *lenb);
+*lenb = 0;
+}
+
 /**
  * _printf - Printf function
  * @format: format.
@@ -42,15 +53,4 @@ chars_print += print;
 print_ing(ingre, &lenb);
 va_end(args);
 return (chars_print);
-}
-/**
- * print_ing - Prints the contents of the buffer if it exist
- * @ingre: Array of chars
- * @lenb: Index at which to add next char, represents the length.
-*/
-void print_ing(char ingre[], int *lenb)
-{
-if (*lenb > 0)
-write(1, &ingre[0], *lenb);
-*lenb = 0;
 }

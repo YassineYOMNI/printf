@@ -9,7 +9,7 @@
  * @size: Size specifier
  * Return: Number of chars printed.
 */
-int handle_write_char(char c, char ingre[],
+int handle_num(char c, char ingre[],
 	int flags, int width, int precision, int size)
 {
 	int i = 0;
