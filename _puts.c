@@ -44,7 +44,7 @@ int get_precision(const char *format, int *i, va_list args)
 	if (format[recurr_i] != '.')
 		return (precision);
 
-	precision = 0;
+/*	precision = 0;*/
 
 	for (recurr_i += 1; format[recurr_i] != '\0'; recurr_i++)
 	{
