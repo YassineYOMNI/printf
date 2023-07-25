@@ -8,8 +8,10 @@
 void print_ing(char ingre[], int *lenb)
 {
 if (*lenb > 0)
+{
 write(1, &ingre[0], *lenb);
 *lenb = 0;
+}
 }
 
 /**
@@ -24,6 +26,7 @@ int flags, width, precision, size, lenb = 0;
 va_list args;
 char ingre[BUFF_SIZE];
 if (format == NULL)
+{
 return (-1);
 va_start(args, format);
 for (i = 0; format && format[i] != '\0'; i++)
@@ -32,9 +35,12 @@ if (format[i] != '%')
 {
 ingre[lenb++] = format[i];
 if (lenb == BUFF_SIZE)
+{
 print_ing(ingre, &lenb);
-/* write(1, &format[i], 1);*/
 chars_print++;
+}
+}
+}
 }
 else
 {
@@ -46,6 +52,7 @@ size = get_size(format, &i);
 ++i;
 print = handle_printed(format, &i, args, ingre, flags, width, precision, size);
 if (print == -1)
+{
 return (-1);
 chars_print += print;
 }
