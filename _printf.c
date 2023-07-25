@@ -51,6 +51,6 @@ return (chars_print);
 void print_ing(char ingre[], int *lenb)
 {
 if (*lenb > 0)
-write(1, &ingre[0], *lens);
+write(1, &ingre[0], *lenb);
 *lenb = 0;
 }
