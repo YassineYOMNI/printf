@@ -11,7 +11,7 @@
  * @size: Size specifier
  * Return: 1 or 2;
 */
-int handle_print(const char *yas, int *ind, va_list args, char ingre[],
+int handle_print(const char *yas, int *n, va_list args, char ingre[],
 	int flags, int width, int precision, int size)
 {
 	int i, unknow_len = 0, chars_print = -1;
