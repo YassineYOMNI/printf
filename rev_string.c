@@ -23,7 +23,7 @@ int rev_string(va_list list, char ingre[],
 	UNUSED(width);
 	UNUSED(size);
 
-	str = va_arg(ingre, char *);
+	str = va_arg(list, char *);
 
 	if (str == NULL)
 	{
