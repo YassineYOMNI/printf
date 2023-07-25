@@ -91,7 +91,7 @@ int print_rot13str(va_list list, char ingre[],
 	int flags, int width, int precision, int size);
 
 /* width handler */
-int handle_write_char(char c, char ingre[],
+int handle_num(char c, char ingre[],
 	int flags, int width, int precision, int size);
 int write_number(int is_positive, int n, char ingre[],
 	int flags, int width, int precision, int size);
