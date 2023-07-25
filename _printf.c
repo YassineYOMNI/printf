@@ -10,7 +10,6 @@ if (*lenb > 0)
 write(1, &ingre[0], *lenb);
 *lenb = 0;
 }
-
 /**
  * _printf - Printf function
  * @format: format.
