@@ -28,7 +28,6 @@ int print_unsigned(va_list list, char ingre[],
 		ingre[i--] = (num % 10) + '0';
 		num /= 10;
 	}
-}
 
 	i++;
 
