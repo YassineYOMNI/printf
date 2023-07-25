@@ -1,31 +1,45 @@
 #include "main.h"
-#include <stdio.h>
-#include <limits.h>
+
 
 /**
- * rev_string - Reverse a string
- * @s: Our string
- *
- * Return: void.
- */
-void rev_string(char *s)
+ * rev_string - Prints reverse string.
+ * @list: List of arguments
+ * @ingre: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Numbers of chars printed
+*/
+
+int rev_string(va_list list, char ingre[],
+	int flags, int width, int precision, int size)
 {
-	int i, len = 0;
-	int tmp = 0;
+	char *str;
+	int i, count = 0;
 
-	for (i = 0; s[i] != '\0'; i++)
+	UNUSED(ingre);
+        UNUSED(flags);
+	UNUSED(width);
+	UNUSED(size);
+
+	str = va_arg(ingre, char *);
+
+	if (str == NULL)
 	{
-		len++;
+		UNUSED(precision);
+
+		str = ")Null(";
 	}
+	for (i = 0; str[i]; i++)
+		;
 
-	i = 0;
-	len--;
-
-	while (i <= len / 2)
+	for (i = i - 1; i >= 0; i--)
 	{
-		tmp = s[i];
-		s[i] = s[len - i];
-		s[len - i] = tmp;
-		i++;
+		char z = str[i];
+
+		write(1, &z, 1);
+		count++;
 	}
+	return (count);
 }

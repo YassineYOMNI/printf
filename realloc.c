@@ -1,48 +1,51 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
 #include "main.h"
 
 /**
- * _realloc - Reallocates a memory block using malloc and free
- * @ptr:pointer to previously allocated memory
- * @old_size: previous allocated size
- * @new_size: new allocated size
- *
- * Return: a pointer to the new allocated memory, returns NULL if an error.
- */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+ * print_pointer - Prints the value of a pointer variable
+ * @list: List of arguments
+ * @ingre: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed.
+*/
+int print_pointer(va_list list, char ingre[],
+	int flags, int width, int precision, int size)
 {
-	void *new;
+	char more = 0, pad = ' ';
+	int n = BUFF_SIZE - 2, length = 2, pad_alpha = 1;
+	unsigned long address;
+	char on_to[] = "0123456789abcdef";
+	void *addrs = va_arg(types, void *);
 
-	if (old_size == new_size)
+	UNUSED(width);
+	UNUSED(size);
+
+	if (addrs == NULL)
+		return (write(1, "(nil)", 5));
+
+	ingre[BUFF_SIZE - 1] = '\0';
+	UNUSED(precision);
+
+	address = (unsigned long)addrs;
+
+	while (address > 0)
 	{
-		return (ptr);
-	}
-	if (ptr == NULL)
-	{
-		ptr = malloc(new_size);
-		return (ptr);
-	}
-	if (ptr != NULL && new_size == 0)
-	{
-		free(ptr);
-		return (NULL);
+		ingre[n--] = on_to[address % 16];
+		address /= 16;
+		length++;
 	}
 
-	new = malloc(new_size);
-	if (new == NULL)
-		return (NULL);
+	if ((flags & F_ZERO) && !(flags & F_MINUS))
+		pad = '0';
+	if (flags & F_PLUS)
+		more = '+', length++;
+	else if (flags & F_SPACE)
+		more = ' ', length++;
 
-	if (new_size < old_size)
-	{
-		memcpy(new, ptr, new_size);
-		free(ptr);
-	}
-	else if (new_size > old_size)
-	{
-		memcpy(new, ptr, old_size);
-		free(ptr);
-	}
-	return (new);
+	n++;
+
+	return (write_pointer(ingre, n, length,
+		width, flags, pad, more, pad_alpha));
 }

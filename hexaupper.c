@@ -1,18 +1,35 @@
 #include "main.h"
 
 /**
- * _hexaupper - convert num to hex upper
- * @num: the number
- * @len: length of the resulting string
- */
-
-void	_hexaupper(unsigned long num, int *len)
+ * print_hexadecimal - Prints an unsigned number in hexadecimal notation
+ * @list: List of arguments
+ * @ingre: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
+*/
+int print_hexadecimal(va_list list, char ingre[],
+	int flags, int width, int precision, int size)
 {
-	char	*hex;
+	return (hexa_seen(list, "0123456789abcdef", ingre,
+		flags, 'x', width, precision, size));
+}
 
-	hex = "0123456789ABCDEF";
-	if (num > 15)
-		_hexaupper(num / 16, len);
-	_putchar(hex[num % 16]);
-	(*len)++;
+/**
+ * hexa_seen_upper - Prints an unsigned number in upper hexadecimal notation
+ * @list: List of arguments
+ * @ingre: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
+*/
+int hexa_seen_upper(va_list list, char ingre[],
+	int flags, int width, int precision, int size)
+{
+	return (hexa_seen(list, "0123456789ABCDEF", ingre,
+		flags, 'X', width, precision, size));
 }

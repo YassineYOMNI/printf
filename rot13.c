@@ -1,41 +1,53 @@
 #include "main.h"
 
 /**
- * rot13 - Encode a string using rot13 and print it
- * @s: Our string
- *
- * Return: the string length.
- */
-int rot13(char *s)
+ * print_rot13str - Print a string in rot13.
+ * @list: List of arguments
+ * @ingre: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Numbers of chars printed
+*/
+int print_rot13str(va_list list, char ingre[],
+	int flags, int width, int precision, int size)
 {
-	int i, j;
-	int len = 0;
-	char *input = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char *output = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-	char *rotated = _strdup(s);
+	char x;
+	char *str;
+	unsigned int i, j;
+	int count = 0;
+	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	if (!rotated)
-	{
-		write(1, "(null)", 6);
-		return (6);
-	}
+	str = va_arg(list, char *);
+	UNUSED(ingre);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
 
-	for (i = 0; rotated[i] != '\0'; i++)
-	{
-		for (j = 0; input[j] != '\0'; j++)
+	if (str == NULL)
+		str = "(AHYY)";
+	for (i = 0; str[i]; i++)
+{
+		for (j = 0; input[j]; j++)
 		{
-			if (rotated[i] == input[j] && rotated[i - 1] != '\\')
+			if (input[j] == str[i])
 			{
-				rotated[i] = output[j];
+				x = output[j];
+				write(1, &x, 1);
+				count++;
 				break;
 			}
 		}
+		if (!input[j])
+		{
+			x = str[i];
+			write(1, &x, 1);
+			count++;
+		}
 	}
-
-	while (rotated[len])
-	{
-		write(1, &rotated[len], 1);
-		len++;
-	}
-	return (len);
+	return (count);
 }
+

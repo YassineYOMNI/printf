@@ -1,47 +1,47 @@
 #include "main.h"
 
 /**
- * print_binary - Prints number converted to binary
- * @num: number to convert
- * @len: pointer to string length
- *
- * Return: 0 on succes, -1 on error
+ * print_binary - Prints an unsigned number
+ * @list: List of arguments
+ * @ingre: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Numbers of char printed.
  */
-int print_binary(unsigned int num, int *len)
+int print_binary(va_list list, char ingre[],
+	int flags, int width, int precision, int size)
 {
-	int i, size = 2;
-	char *binary;
-
-	binary = malloc(size * sizeof(char));
-	if (!binary)
+	unsigned int k, l, i, sum;
+	unsigned int b[32];
+	int count;
+        UNUSED(ingre);
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
+k = va_arg(list, unsigned int);
+	l = 2147483648;
+	b[0] = k / l;
+	for (i = 1; i < 32; i++)
 	{
-		free(binary);
-		return (-1);
+		l /= 2;
+		b[i] = (k / l) % 2;
 	}
-
-	if (num == 0)
+	for (i = 0, sum = 0, count = 0; i < 32; i++)
 	{
-		binary[0] = '0';
-		i = 1;
-	}
-	else if (num == 1)
-	{
-		binary[0] = '1';
-		i = 1;
-	}
-	else
-	{
-		for (i = 0; num != 0; i++)
+		sum += b[i];
+		if (sum || i == 31)
 		{
-			binary[i] = (num % 2) + '0';
-			binary = _realloc(binary, size * sizeof(char), (size + 1) * sizeof(char));
-			size++;
-			num /= 2;
+			char z = '0' + b[i];
+write(1, &z, 1);
+			count++;
 		}
 	}
-	binary[i] = '\0';
-	rev_string(binary);
-	*len += _puts(binary);
-	free(binary);
-	return (0);
+	return (count);
 }
+
+
+
+

@@ -1,50 +1,43 @@
 #include "main.h"
-#include <limits.h>
 
 /**
- * print_num - prints a number
- * @n: our number
- * @len: pointer to the string length
- *
- * Return: void.
- */
-
-void	print_num(long n, int *len)
+ * print_num - Print int
+ * @list: List of arguments
+ * @ingre: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed
+*/
+int print_num(va_list list, char ingre[],
+	int flags, int width, int precision, int size)
 {
-	int d = 1000000000, l = 0;
+	int i = BUFF_SIZE - 2;
+	int is_neg = 0;
+	long int y = va_arg(list, long int);
+	unsigned long int num;
 
-	if (n < 0 && n != INT_MIN)
+	y = number_convert(y, size);
+
+	if (y == 0)
+		ingre[i--] = '0';
+
+	ingre[BUFF_SIZE - 1] = '\0';
+	num = (unsigned long int)y;
+if (y < 0)
 	{
-		_putchar('-');
-		(*len)++;
-		n = -n;
+		num = (unsigned long int)((-1) * y);
+		is_neg = 1;
 	}
 
-	while (l == 0 && n > 0)
+	while (num > 0)
 	{
-		l = (n / d) % 10;
-		d /= 10;
+		ingre[i--] = (num % 10) + '0';
+		num /= 10;
 	}
 
-	while (d > 0 && n > 0)
-	{
-		_putchar(l + '0');
-		(*len)++;
-		l = (n / d) % 10;
-		d /= 10;
-	}
+	i++;
 
-	if (n != INT_MIN)
-	{
-		_putchar(n % 10 + '0');
-		(*len)++;
-	}
-
-	if (n == INT_MIN)
-	{
-		_putchar('-');
-		(*len)++;
-		print_num((INT_MIN / 100) * -1, len);
-		print_num((INT_MIN % 100) * -1, len);
-	}
+	return (write_number(is_neg, i, ingre, flags, width, precision, size));
 }

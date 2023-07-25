@@ -1,28 +1,36 @@
 #include "main.h"
 
 /**
- * _unsigned - prints a number
- * @n: our number
- * @len: pointer to the string length
- */
-
-void	_unsigned(unsigned int n, int *len)
+ * print_unsigned - Prints an unsigned number
+ * @list: List  of arguments
+ * @ingre: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width
+ * @precision: Precision specification
+ * @size: Size specifier
+ * Return: Number of chars printed.
+*/
+int print_unsigned(va_list list, char ingre[],
+	int flags, int width, int precision, int size)
 {
-	int d = 1000000000, l = 0;
+	int i = BUFF_SIZE - 2;
+	unsigned long int num = va_arg(list, unsigned long int);
 
-	while (l == 0 && n > 0)
-	{
-		l = (n / d) % 10;
-		d /= 10;
-	}
+	num = unsigned_size(num, size);
 
-	while (d > 0 && n > 0)
+	if (num == 0)
+		ingre[i--] = '0';
+
+	ingre[BUFF_SIZE - 1] = '\0';
+
+	while (num > 0)
 	{
-		_putchar(l + '0');
-		(*len)++;
-		l = (n / d) % 10;
-		d /= 10;
+		ingre[i--] = (num % 10) + '0';
+		num /= 10;
 	}
-	_putchar(n % 10 + '0');
-	(*len)++;
+}
+
+	i++;
+
+	return (unsigned_num(0, i, ingre, flags, width, precision, size));
 }
