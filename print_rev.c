@@ -14,5 +14,5 @@ int char_print(va_list list, char ingre[],
 	int flags, int width, int precision, int size)
 {
 	char c = va_arg(list, int);
-return (handle_num(p, ingre, flags, width, precision, size));
+return (handle_num(c, ingre, flags, width, precision, size));
 }
