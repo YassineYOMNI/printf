@@ -17,7 +17,7 @@ int print_pointer(va_list list, char ingre[],
 	int n = BUFF_SIZE - 2, length = 2, pad_alpha = 1;
 	unsigned long address;
 	char on_to[] = "0123456789abcdef";
-	void *addrs = va_arg(types, void *);
+	void *addrs = va_arg(list, void *);
 
 	UNUSED(width);
 	UNUSED(size);
