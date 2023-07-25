@@ -20,7 +20,7 @@ int print_gain(char c)
  * @ascii_code: ASCCI CODE.
  * Return: Always 3
 */
-int hexa_append(char ascii_code, char buffer[], int i)
+int hexa_append(char ascii_code, char ingre[], int i)
 {
 	char on_to[] = "0123456789ABCDEF";
 	if (ascii_code < 0)
