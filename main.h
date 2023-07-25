@@ -38,6 +38,8 @@ struct yas
 typedef struct yas yas_t;
 
 int _printf(const char *format, ...);
+int handle_printed(const char *format,  int *i,
+va_list args, char ingre[], int flags, int width, int precision, int size);
 int handle_printed(const char *yas, int *i,
 va_list args, char ingre[], int flags, int width, int precision, int size);
 

@@ -37,7 +37,6 @@ int handle_write_char(char c, char ingre[],
 			return (write(1, &ingre[BUFF_SIZE - i - 1], width - 1) +
 					write(1, &ingre[0], 1));
 	}
-
 	return (write(1, &ingre[0], 1));
 }
 
